@@ -1,5 +1,9 @@
 # 🎄 Advent of Code 2024 🎄
-
+```
+╻┏ ┏━┓╺┳┓┏━┓╺┳┓╻ ╻┏━╸┏┓╻╺┳╸
+┣┻┓┃ ┃ ┃┃┣━┫ ┃┃┃┏┛┣╸ ┃┗┫ ┃ 
+╹ ╹┗━┛╺┻┛╹ ╹╺┻┛┗┛ ┗━╸╹ ╹ ╹ 
+```
 Welcome to my **Advent of Code 2024** solutions repository! Each year, [Advent of Code](https://adventofcode.com/) brings coding enthusiasts together for 25 days of fun and challenging programming puzzles. Here's my journey through the 2024 edition.
 
 ## 📆 Progress
@@ -8,31 +12,31 @@ Here’s a checklist to track my progress through the days. Each day consists of
 
 | Day | Part 1 | Part 2 | Notes |
 |-----|--------|--------|-------|
-| ✅ Day 1  | ✅ Done | ✅ Done | Warm-up puzzle |
-| ✅ Day 2  | ✅ Done | ✅ Done | Took way too long! |
-| ✅ Day 3  | ✅ Done | ✅ Done | Not regex noooooo |
-| ✅ Day 4  | ✅ Done | ✅ Done | Grids will take us apart, again. |
-| ⬜ Day 5  | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 6  | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 7  | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 8  | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 9  | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 10 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 11 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 12 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 13 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 14 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 15 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 16 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 17 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 18 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 19 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 20 | ⬜ To Do | ⬜ To Do | Very small chance I'll do these in real time!|
-| ⬜ Day 21 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 22 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 23 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 24 | ⬜ To Do | ⬜ To Do | |
-| ⬜ Day 25 | ⬜ To Do | ⬜ To Do | The grand finale! 🎉 |
+| Day 1  | ✅  | ✅  | Warm-up puzzle |
+| Day 2  | ✅  | ✅  | Took way too long! |
+| Day 3  | ✅  | ✅  | Not regex noooooo |
+| Day 4  | ✅  | ✅  | Grids will take us apart, again. |
+| Day 5  | ⬜  | ⬜  | |
+| Day 6  | ⬜  | ⬜  | |
+| Day 7  | ⬜  | ⬜  | |
+| Day 8  | ⬜  | ⬜  | |
+| Day 9  | ⬜  | ⬜  | |
+| Day 10 | ⬜  | ⬜  | |
+| Day 11 | ⬜  | ⬜  | |
+| Day 12 | ⬜  | ⬜  | |
+| Day 13 | ⬜  | ⬜  | |
+| Day 14 | ⬜  | ⬜  | |
+| Day 15 | ⬜  | ⬜  | |
+| Day 16 | ⬜  | ⬜  | |
+| Day 17 | ⬜  | ⬜  | |
+| Day 18 | ⬜  | ⬜  | |
+| Day 19 | ⬜  | ⬜  | |
+| Day 20 | ⬜  | ⬜  | Very small chance I'll do these in real time!|
+| Day 21 | ⬜  | ⬜  | |
+| Day 22 | ⬜  | ⬜  | |
+| Day 23 | ⬜  | ⬜  | |
+| Day 24 | ⬜  | ⬜  | |
+| Day 25 | ⬜  | ⬜  | The grand finale! 🎉 |
 
 ---
 
