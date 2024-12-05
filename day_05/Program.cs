@@ -1,4 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿// https://adventofcode.com/2024/day/5
 Console.WriteLine("Hello, World!");
 
 string inString = @"47|53
@@ -29,7 +29,7 @@ string inString = @"47|53
 75,97,47,61,53
 61,13,29
 97,13,75,29,47";
-// string inString = File.ReadAllText("input.txt");
+inString = File.ReadAllText("input.txt");
 
 var pairs = inString.Split("\n\n")[0].Split("\n")
     .Select(line => line.Split("|").Select(int.Parse).ToArray());
@@ -37,7 +37,6 @@ var pairs = inString.Split("\n\n")[0].Split("\n")
 var manuals = inString.Split("\n\n")[1].Split("\n")
     .Select(line => line.Split(",").Select(int.Parse).ToArray())
     .ToList();
-
 
 Dictionary<int, List<int>> after = [];
 Dictionary<int, List<int>> before = [];
@@ -47,11 +46,12 @@ foreach (var pair in pairs)
     before.TryAdd(pair[1], []);
     before[pair[1]].Add(pair[0]);
 
-    // after.TryAdd(pair[1], []);
-    // after[pair[1]].Add(pair[0]);
+    after.TryAdd(pair[0], []);
+    after[pair[0]].Add(pair[1]);
 }
-int totalOrdered = 0;
 
+int totalOrdered = 0;
+int totalUnorderedButFixed = 0;
 foreach(var manual in manuals)
 {
     if(IsValid(manual))
@@ -60,10 +60,15 @@ foreach(var manual in manuals)
     }
     else
     {
-
+        var fixedManual = manual
+            .OrderBy(i => i,Comparer<int>.Create((a, b) => Compare(a, b)))
+            .ToArray();
+        totalUnorderedButFixed += fixedManual[manual.Length/2];
     }
 }
+
 Console.WriteLine($"Part One: {totalOrdered}");
+Console.WriteLine($"Part Two: {totalUnorderedButFixed}");
 
 bool IsValid(int[] manual)
 {
@@ -83,3 +88,18 @@ bool IsValid(int[] manual)
     return true;
 }
 
+// returns wheter a should be before b
+int Compare(int a, int b)
+{
+    if (before.TryGetValue(b, out var numbersThanShouldBeBefore))
+    {
+        if(numbersThanShouldBeBefore.Contains(a))
+            return -1;
+    }
+    if (after.TryGetValue(b, out var numbersThanShouldBeAfter))
+    {
+        if(numbersThanShouldBeAfter.Contains(a))
+            return 1;
+    }
+    return 0;
+}
