@@ -26,7 +26,7 @@ Here’s a checklist to track my progress through the days. Each day consists of
 | Day 2  | ✅  | ✅  | Took way too long! |
 | Day 3  | ✅  | ✅  | Not regex noooooo |
 | Day 4  | ✅  | ✅  | Grids will take us apart, again. |
-| Day 5  | ✅  | ✅  | |
+| Day 5  | ✅  | ✅  | Never implemented a Comparer before.  |
 | Day 6  | ✅  | ⬜  | Free time dwindling |
 | Day 7  | ⬜  | ⬜  | |
 | Day 8  | ⬜  | ⬜  | |
