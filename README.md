@@ -26,8 +26,8 @@ Here’s a checklist to track my progress through the days. Each day consists of
 | Day 2  | ✅  | ✅  | Took way too long! |
 | Day 3  | ✅  | ✅  | Not regex noooooo |
 | Day 4  | ✅  | ✅  | Grids will take us apart, again. |
-| Day 5  | ✅  | ✅  | Never implemented a Comparer before.  |
-| Day 6  | ✅  | ⬜  | Free time dwindling |
+| Day 5  | ✅  | ✅  | Never implemented an IComparer before.  |
+| Day 6  | ✅  | ✅  | Kind of brute force solution for part 2, but just happy i solved it honestly.|
 | Day 7  | ⬜  | ⬜  | |
 | Day 8  | ⬜  | ⬜  | |
 | Day 9  | ⬜  | ⬜  | |
