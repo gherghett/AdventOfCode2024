@@ -11,7 +11,7 @@ string inString = @"190: 10 19
 
 // var lines = inString.Split("\n");
 var lines = File.ReadAllLines("input.txt");
-List<(long target , List<long> nums)> values = [];
+List<(long target, List<long> nums)> values = [];
 foreach (var line in lines)
 {
     long testValue = long.Parse(line.Split(":")[0]);
@@ -27,8 +27,10 @@ List<Func<long, long, long>> operatorsForPart1 = [
     (long a, long b) => a + b,
 ];
 
-var operatorsForPart2 = operatorsForPart1.ToList()
-    .Append((a, b) => long.Parse($"{a}{b}")).ToList();
+var operatorsForPart2 = operatorsForPart1.Concat([
+        (a, b) => long.Parse($"{a}{b}")
+    ])
+    .ToList();
 
 long sumOfMatchesPart1 = 0;
 long sumOfMatchesPart2 = 0;
@@ -36,42 +38,43 @@ foreach (var value in values)
 {
     long target = value.target;
     var nums = value.nums;
+    
     if (CanMatch(target, nums, operatorsForPart1))
     {
         sumOfMatchesPart1 += target;
         // Console.WriteLine($"{target}, total: {sumOfMatches}");
     }
 
-    if(CanMatch(target, nums, operatorsForPart2))
+    if (CanMatch(target, nums, operatorsForPart2))
     {
         sumOfMatchesPart2 += target;
     }
     // Console.WriteLine($"{target}: {string.Join(" ",nums)}, {canMatch}");
 }
 
-Console.WriteLine("Part 1, sum of matches: "+ sumOfMatchesPart1);
-Console.WriteLine("Part 2, sum of matches: "+ sumOfMatchesPart2);
+Console.WriteLine("Part 1, sum of matches: " + sumOfMatchesPart1);
+Console.WriteLine("Part 2, sum of matches: " + sumOfMatchesPart2);
 
-bool CanMatch(long target, List<long> nums, List<Func<long,long,long>> ops)
+bool CanMatch(long target, List<long> nums, List<Func<long, long, long>> ops)
 {
     if (nums.Count == 1)
     {
-        if(nums[0] == target)
+        if (nums[0] == target)
             return true;
         else
             return false;
     }
 
     // it can only get bigger or stay the same so 
-    if(nums[0] > target)
+    if (nums[0] > target)
         return false;
-    
-    foreach( var op in ops)
+
+    foreach (var op in ops)
     {
         var newList = nums.Skip(2)
             .Prepend(op(nums[0], nums[1])).ToList();
-            
-        if(CanMatch(target,  newList, ops))
+
+        if (CanMatch(target, newList, ops))
             return true;
     }
 
