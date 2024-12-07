@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿Console.WriteLine("Day 7!");
 string inString = @"190: 10 19
 3267: 81 40 27
 83: 17 5
@@ -23,27 +22,37 @@ foreach (var line in lines)
     values.Add((testValue, nums));
 }
 
-List<Func<long, long, long>> operators = [
+List<Func<long, long, long>> operatorsForPart1 = [
     (long a, long b) => a * b,
-    (long a, long b) => a + b
+    (long a, long b) => a + b,
 ];
 
-long sumOfMatches = 0;
+var operatorsForPart2 = operatorsForPart1.ToList()
+    .Append((a, b) => long.Parse($"{a}{b}")).ToList();
+
+long sumOfMatchesPart1 = 0;
+long sumOfMatchesPart2 = 0;
 foreach (var value in values)
 {
     long target = value.target;
     var nums = value.nums;
-    bool canMatch = CanMatch(target, nums);
-    if (canMatch)
+    if (CanMatch(target, nums, operatorsForPart1))
     {
-        sumOfMatches += target;
+        sumOfMatchesPart1 += target;
         // Console.WriteLine($"{target}, total: {sumOfMatches}");
+    }
+
+    if(CanMatch(target, nums, operatorsForPart2))
+    {
+        sumOfMatchesPart2 += target;
     }
     // Console.WriteLine($"{target}: {string.Join(" ",nums)}, {canMatch}");
 }
-Console.WriteLine("Part 1, sum of matches: "+ sumOfMatches);
 
-bool CanMatch(long target, List<long> nums)
+Console.WriteLine("Part 1, sum of matches: "+ sumOfMatchesPart1);
+Console.WriteLine("Part 2, sum of matches: "+ sumOfMatchesPart2);
+
+bool CanMatch(long target, List<long> nums, List<Func<long,long,long>> ops)
 {
     if (nums.Count == 1)
     {
@@ -57,10 +66,12 @@ bool CanMatch(long target, List<long> nums)
     if(nums[0] > target)
         return false;
     
-    foreach( var op in operators)
+    foreach( var op in ops)
     {
-        var newList = nums.Skip(2).Prepend(op(nums[0], nums[1])).ToList();
-        if(CanMatch(target,  newList))
+        var newList = nums.Skip(2)
+            .Prepend(op(nums[0], nums[1])).ToList();
+            
+        if(CanMatch(target,  newList, ops))
             return true;
     }
 
