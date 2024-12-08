@@ -58,7 +58,7 @@ Here’s a checklist to track my progress through the days. Each day consists of
    ```
 2. Navigate to the day’s folder:
    ```bash
-   cd day04
+   cd day_04
    ```
 3. Run the solution using your preferred C# compiler or IDE (e.g., `dotnet run`).
 
