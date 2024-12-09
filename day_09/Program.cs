@@ -1,56 +1,75 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Text;
+using System.Transactions;
 
 Console.WriteLine("Hello, World!");
-string inString = "2333133121414131402";
-StringBuilder sb = new StringBuilder();
+// string inString = "2333133121414131402";
+string inString = File.ReadAllText("input.txt");
+List<int> fileSystem = new();
 for (int i = 0; i < inString.Length; i++)
 {
     int amount = (int)char.GetNumericValue(inString[i]);
     if (i % 2 == 0)
     {
         //fileblocks
-        sb.Append($"{i / 2}"[0], amount);
+        int index = i / 2;
+        for (int j = 0; j < amount; j++)
+        {
+            fileSystem.Add(index);
+        }
     }
     else
     {
         //empty spaces
-        sb.Append('.', amount);
+        for (int j = 0; j < amount; j++)
+        {
+            fileSystem.Add(-1);
+        }
     }
 }
+// Console.WriteLine(string.Join(",", fileSystem));
 
-int leftMostEmpty = GetLeftMostEmptyAfter(sb);
-for (int i = sb.Length - 1; i > 0; i--)
+
+int leftMostEmpty = GetLeftMostEmptyAfter(fileSystem);
+for (int i = fileSystem.Count - 1; i > 0; i--)
 {
-    char current = sb[i];
-    if (!char.IsDigit(current))
+    int current = fileSystem[i];
+    if (current == -1)
         continue;
 
-    if( i <= leftMostEmpty)
+    if (i <= leftMostEmpty)
         break;
 
-    sb[leftMostEmpty] = current;
-    
-    sb[i] = '.';
-    Console.WriteLine(sb);
+    fileSystem[leftMostEmpty] = current;
 
-    leftMostEmpty = GetLeftMostEmptyAfter(sb, leftMostEmpty);
+    fileSystem[i] = -1;
+    // Console.WriteLine(string.Join("", fileSystem));
+
+    leftMostEmpty = GetLeftMostEmptyAfter(fileSystem, leftMostEmpty);
     if (leftMostEmpty == -1)
         break;
 }
 
+Console.WriteLine(GetCheckSum(fileSystem));
 
-int GetLeftMostEmptyAfter(StringBuilder sb, int i = -1)
+
+int GetLeftMostEmptyAfter(List<int> fs, int i = -1)
 {
+    int count = fs.Count;
     do
     {
         i++;
-        if(i == sb.Length)
+        if (i >= count)
             return -1;
     }
-    while (sb[i] != '.');
+    while (fs[i] != -1);
 
     return i;
 }
 
-Console.WriteLine(sb);
+long GetCheckSum(List<int> fs)
+ => fs
+    .Select((i, index) => i > 0 ? (long)(i * index) : 0)
+    .Sum();
+
+// Console.WriteLine(fileSystem);
