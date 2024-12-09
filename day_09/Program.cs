@@ -1,10 +1,8 @@
 ﻿
-using System.Text;
-using System.Transactions;
-
 Console.WriteLine("Day 9!");
 // string inString = "2333133121414131402";
 string inString = File.ReadAllText("input.txt");
+
 List<int> fileSystem = new();
 for (int i = 0; i < inString.Length; i++)
 {
@@ -29,7 +27,6 @@ for (int i = 0; i < inString.Length; i++)
 }
 // Console.WriteLine(string.Join(",", fileSystem));
 
-
 int leftMostEmpty = GetLeftMostEmptyAfter(fileSystem);
 for (int i = fileSystem.Count - 1; i > 0; i--)
 {
@@ -51,7 +48,8 @@ for (int i = fileSystem.Count - 1; i > 0; i--)
 }
 
 Console.WriteLine($"Part 1: {GetCheckSum(fileSystem)}");
-Part2Solution.Solve();
+var part2 = new Part2Solution(inString);
+part2.Solve();
 
 int GetLeftMostEmptyAfter(List<int> fs, int i = -1)
 {

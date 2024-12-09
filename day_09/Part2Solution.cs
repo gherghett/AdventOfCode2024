@@ -1,60 +1,61 @@
 using System.Text;
-public class Part2Solution
+public class Part2Solution(string inString)
 {
+    string _inString = inString;
+    List<Block> _fileSystem = ParseInputString(inString);
+    long Answer {get; set;}
 
-    public static void Solve()
+    private static List<Block> ParseInputString(string data)
     {
-        string inString = "2333133121414131402";
-        inString = System.IO.File.ReadAllText("input.txt");
-        
-        List<Block> fileSystem = new();
-
-        for (int i = 0; i < inString.Length; i++)
+        List<Block> result = new List<Block>();
+        for (int i = 0; i < data.Length; i++)
         {
-            int amount = (int)char.GetNumericValue(inString[i]);
+            int amount = (int)char.GetNumericValue(data[i]);
             if (i % 2 == 0)
             {
                 //fileblocks
-                fileSystem.Add(new Block { Id = i / 2, Size = amount, IsEmpty = false });
+                result.Add(new Block { Id = i / 2, Size = amount, IsEmpty = false });
             }
             else
             {
                 //empty spaces
-                fileSystem.Add(new Block { Size = amount, IsEmpty = true });
+                result.Add(new Block { Size = amount, IsEmpty = true });
             }
         }
-        // Console.WriteLine(string.Join(",", fileSystem));
-        // PrintFileSystem(fileSystem);
+        return result;
+    }
 
-        int times = 0;
+    public void Solve()
+    {
+        Console.WriteLine("Part 2");
         Console.WriteLine("Defragmenting... might take a minute");
-        foreach (var file in fileSystem.Where(b => !b.IsEmpty).Reverse())
+        
+        int times = 0;
+        foreach (var file in _fileSystem.Where(b => !b.IsEmpty).Reverse())
         {
             // Console.WriteLine(file.Id);
-            var leftmostThatFits = fileSystem
+            var leftmostThatFits = _fileSystem
                 .Where(b => b.IsEmpty && 
                     b.Size >= file.Size && 
-                    fileSystem.IndexOf(b) < fileSystem.IndexOf(file))
+                    _fileSystem.IndexOf(b) < _fileSystem.IndexOf(file))
                 .FirstOrDefault();
 
             if (leftmostThatFits is null)
                 continue;
 
-            var indexOfRemoved = fileSystem.IndexOf(file);
-            fileSystem.Insert(indexOfRemoved, new Block { Size = file.Size, IsEmpty = true });
-            fileSystem.Remove(file);
-            fileSystem.Insert(fileSystem.IndexOf(leftmostThatFits), file);
+            _fileSystem.Insert(_fileSystem.IndexOf(file), new Block { Size = file.Size, IsEmpty = true });
+            _fileSystem.Remove(file);
+            _fileSystem.Insert(_fileSystem.IndexOf(leftmostThatFits), file);
             leftmostThatFits.Size -= file.Size;
-            PackBlocks(fileSystem);
+            PackBlocks(_fileSystem);
             // PrintFileSystem(fileSystem);
-
             // Console.WriteLine($"{times++} ");
-
         }
 
         // PrintFileSystem(fileSystem);
         Console.WriteLine("Calculating CheckSum...");
-        Console.WriteLine(GetCheckSum(fileSystem));
+        Answer = GetCheckSum(_fileSystem);
+        Console.WriteLine(Answer);
     }
 
 
