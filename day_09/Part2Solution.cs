@@ -1,12 +1,13 @@
 using System.Text;
 public class Part2Solution
 {
-    string inString = "2333133121414131402";
 
-    public void Solve()
+    public static void Solve()
     {
-        List<Block> fileSystem = new();
+        string inString = "2333133121414131402";
         inString = System.IO.File.ReadAllText("input.txt");
+        
+        List<Block> fileSystem = new();
 
         for (int i = 0; i < inString.Length; i++)
         {
@@ -26,6 +27,7 @@ public class Part2Solution
         // PrintFileSystem(fileSystem);
 
         int times = 0;
+        Console.WriteLine("Defragmenting... might take a minute");
         foreach (var file in fileSystem.Where(b => !b.IsEmpty).Reverse())
         {
             // Console.WriteLine(file.Id);
@@ -45,15 +47,18 @@ public class Part2Solution
             leftmostThatFits.Size -= file.Size;
             PackBlocks(fileSystem);
             // PrintFileSystem(fileSystem);
-            Console.WriteLine(times++);
+
+            // Console.WriteLine($"{times++} ");
+
         }
 
         // PrintFileSystem(fileSystem);
+        Console.WriteLine("Calculating CheckSum...");
         Console.WriteLine(GetCheckSum(fileSystem));
     }
 
 
-    long GetCheckSum(List<Block> fs)
+    static long GetCheckSum(List<Block> fs)
     {
         long sum = 0;
         long index = 0;
@@ -73,7 +78,7 @@ public class Part2Solution
         return sum;
     }
     
-    void PrintFileSystem(List<Block> fs)
+    static void PrintFileSystem(List<Block> fs)
     {
         for (int i = 0; i < fs.Count; i++)
         {
@@ -93,7 +98,7 @@ public class Part2Solution
         Console.WriteLine(sb);
     }
 
-    void PackBlocks(List<Block> fs)
+    static void PackBlocks(List<Block> fs)
     {
         int index = 0;
         while (index < fs.Count - 1)

@@ -2,7 +2,7 @@
 using System.Text;
 using System.Transactions;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine("Day 9!");
 // string inString = "2333133121414131402";
 string inString = File.ReadAllText("input.txt");
 List<int> fileSystem = new();
@@ -51,7 +51,7 @@ for (int i = fileSystem.Count - 1; i > 0; i--)
 }
 
 Console.WriteLine($"Part 1: {GetCheckSum(fileSystem)}");
-
+Part2Solution.Solve();
 
 int GetLeftMostEmptyAfter(List<int> fs, int i = -1)
 {
