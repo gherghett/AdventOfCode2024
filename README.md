@@ -29,7 +29,7 @@ Here’s a checklist to track my progress through the days. Each day consists of
 | Day 5  | ✅  | ✅  | Never implemented an IComparer before.  |
 | Day 6  | ✅  | ✅  | Kind of brute force solution for part 2, but just happy i solved it honestly.|
 | Day 7  | ✅  | ✅  | The use of funcs really payed off in part 2, only small change needed |
-| Day 8  | ⬜  | ⬜  | |
+| Day 8  | ✅  | ✅  | Antennas! Had a radio-engineer over for dinner when solving this one, what a coincidence |
 | Day 9  | ⬜  | ⬜  | |
 | Day 10 | ⬜  | ⬜  | |
 | Day 11 | ⬜  | ⬜  | |
@@ -58,7 +58,7 @@ Here’s a checklist to track my progress through the days. Each day consists of
    ```
 2. Navigate to the day’s folder:
    ```bash
-   cd day04
+   cd day_04
    ```
 3. Run the solution using your preferred C# compiler or IDE (e.g., `dotnet run`).
 
