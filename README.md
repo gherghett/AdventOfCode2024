@@ -31,7 +31,7 @@ Here’s a checklist to track my progress through the days. Each day consists of
 | Day 7  | ✅  | ✅  | The use of funcs really payed off in part 2, only small change needed |
 | Day 8  | ✅  | ✅  | Antennas! Had a radio-engineer over for dinner when solving this one, what a coincidence |
 | Day 9  | ✅  | ✅  | This one took a while |
-| Day 10 | ⬜  | ⬜  | |
+| Day 10 | ✅  | ✅  | Straight forward Depth First Search |
 | Day 11 | ⬜  | ⬜  | |
 | Day 12 | ⬜  | ⬜  | |
 | Day 13 | ⬜  | ⬜  | |
