@@ -32,22 +32,53 @@ for (int i = 0; i < height; i++)
     (0,-1), //left
 ];
 
-// Part 1, DFS 
-int total = 0;
+int part1Total = 0;
+int part2Total = 0;
+// DFS 
 for (int i = 0; i < height; i++)
 {
     for (int j = 0; j < width; j++)
     {
         if (map[i, j] == 0)
         {
-            int thisCount = TrailHeadCount((0,0), -1, map, (i, j));
+            int howManyNinesCanBeReached = TrailHeadCount((0,0), -1, map, (i, j));
+            part1Total += howManyNinesCanBeReached;
+
+            int howManyPathsToANine = TrailCount((0,0), -1, map, (i, j));
             // Console.WriteLine($"{i}, {j}: {thisCount}");
-            total += thisCount;
+            part2Total += howManyPathsToANine;
         }
     }
 }
-Console.WriteLine($"Part 1: {total}");
+Console.WriteLine($"Part 1: {part1Total}");
+Console.WriteLine($"Part 2: {part2Total}");
 
+
+//Part 2
+int TrailCount((int y, int x) lastDir, int last, int[,] map, (int y, int x) pos)
+{
+    if (!IsInsideBounds(pos))
+        return 0;
+
+    int current = map[pos.y, pos.x];
+
+    // PrintMap(pos, (char)('a' + current));
+
+    if (last == 8 && current == 9)
+        return 1;
+
+    if (last + 1 != current)
+        return 0;
+
+    int total = 0;
+    foreach (var dir in directions.Except(new (int y, int x)[] {(-lastDir.y, -lastDir.x)}))
+    {
+        total += TrailCount(dir, current, map, (pos.y + dir.y, pos.x + dir.x));
+    }
+    return total;
+}
+
+//Part 1
 int TrailHeadCount((int y, int x) lastDir, int last, int[,] map, (int y, int x) pos, HashSet<(int y, int x)>? reachedNines = null)
 {
     if (!IsInsideBounds(pos))
