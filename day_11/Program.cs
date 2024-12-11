@@ -15,13 +15,21 @@
 // multiplied by 2024 is engraved on the new 
 // stone.
 
+Console.WriteLine("Day 11!");
+
 string inString = "5178527 8525 22 376299 3 69312 0 275";
-List<long> stones = inString.Trim().Split(' ')
-    .Select(s => long.Parse(s))
+List<ulong> stones = inString.Trim().Split(' ')
+    .Select(s => ulong.Parse(s))
     .ToList();
 
 Console.WriteLine(string.Join(" ", stones));
 
+Dictionary<(ulong stone, int levels), ulong>? tested = new();
+ulong total = 0;
+for (int i = 0; i < stones.Count; i++)
+{
+    total += GetNumberOfStones(stones[i], 75, tested);
+}
 
 for(int i = 0; i < 25; i++)
 {
@@ -29,9 +37,12 @@ for(int i = 0; i < 25; i++)
     // Console.WriteLine(string.Join(" ", stones));
 }
 
-Console.WriteLine(stones.Count());
 
-List<long> TransformStone(long stone)
+Console.WriteLine($"Part 1: {stones.Count}");
+Console.WriteLine($"Part 2: {total}");
+
+
+List<ulong> TransformStone(ulong stone)
 {
     if( stone  == 0 )
         return [1];
@@ -39,10 +50,36 @@ List<long> TransformStone(long stone)
     string stoneString = stone.ToString();
     if( stoneString.Length % 2 == 0 )
     {
-        long first = long.Parse(stoneString.Substring(0, stoneString.Length/2));
-        long second = long.Parse(stoneString.Substring(stoneString.Length/2, stoneString.Length/2));
+        ulong first = ulong.Parse(stoneString.Substring(0, stoneString.Length/2));
+        ulong second = ulong.Parse(stoneString.Substring(stoneString.Length/2, stoneString.Length/2));
         return [first, second];
     }
 
     return [stone*2024];
+}
+
+
+ulong GetNumberOfStones( ulong stone, int levels, Dictionary<(ulong stone, int levels), ulong>? tested = null)
+{
+    if(tested is null)
+        tested = new();
+
+    if(tested.ContainsKey((stone, levels)))
+    {
+        //Console.WriteLine("testing working");
+        return tested[(stone, levels)];
+    }
+
+    if( levels == 0 )
+        return 1;
+    
+    var stones = TransformStone(stone);
+
+    ulong total = 0;
+    foreach (var s in stones)
+    {
+        total += GetNumberOfStones(s, levels - 1, tested);
+    }
+    tested[(stone, levels)] = total;
+    return total;
 }
