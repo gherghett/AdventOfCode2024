@@ -20,8 +20,8 @@ Welcome to my **Advent of Code 2024** solutions repository! Each year, [Advent o
 
 Here’s a checklist to track my progress through the days. Each day consists of two parts. 
 
-| Day | Part 1 | Part 2 | Notes |
-|-----|--------|--------|-------|
+| Day    | Part 1 | Part 2 | Notes |
+|--------|--------|--------|-------|
 | Day 1  | ✅  | ✅  | Warm-up puzzle |
 | Day 2  | ✅  | ✅  | Took way too long! |
 | Day 3  | ✅  | ✅  | Not regex noooooo |
