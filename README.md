@@ -33,7 +33,7 @@ Here’s a checklist to track my progress through the days. Each day consists of
 | Day 9  | ✅  | ✅  | This one took a while |
 | Day 10 | ✅  | ✅  | Straight forward Search |
 | Day 11 | ✅  | ✅   | Optimization! |
-| Day 12 | ⬜  | ⬜  | |
+| Day 12 | ✅  | ✅  | This took all day...  |
 | Day 13 | ⬜  | ⬜  | |
 | Day 14 | ⬜  | ⬜  | |
 | Day 15 | ⬜  | ⬜  | |
