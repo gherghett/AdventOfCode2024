@@ -34,7 +34,7 @@ Here’s a checklist to track my progress through the days. Each day consists of
 | Day 10 | ✅  | ✅  | Straight forward Search |
 | Day 11 | ✅  | ✅   | Optimization! |
 | Day 12 | ✅  | ✅  | This took all day...  |
-| Day 13 | ⬜  | ⬜  | |
+| Day 13 | ✅  | ⬜  | Had to look up a solution for part 2... |
 | Day 14 | ⬜  | ⬜  | |
 | Day 15 | ⬜  | ⬜  | |
 | Day 16 | ⬜  | ⬜  | |
