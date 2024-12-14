@@ -23,7 +23,7 @@ string buttonAPattern = @"Button A:\s*X\+(\d+),\s*Y\+(\d+)";
 string buttonBPattern = @"Button B:\s*X\+(\d+),\s*Y\+(\d+)";
 string prizePattern = @"Prize:\s*X=(\d+),\s*Y=(\d+)";
 
-inString = File.ReadAllText("input.txt");
+// inString = File.ReadAllText("input.txt");
 
 // Parse input 
 var machines = inString.Trim().Split("\n\n")
@@ -48,7 +48,7 @@ for (int i = 0; i < 100 + 1 ; i++)
 
 var flatCombinations = pressCombinations.SelectMany(l => l);
 
-var cost = machines
+int cost = machines
     .Select(machine =>
     {
         return flatCombinations
