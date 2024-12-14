@@ -32,10 +32,10 @@ Here’s a checklist to track my progress through the days. Each day consists of
 | Day 8  | ✅  | ✅  | Antennas! Had a radio-engineer over for dinner when solving this one, what a coincidence |
 | Day 9  | ✅  | ✅  | This one took a while |
 | Day 10 | ✅  | ✅  | Straight forward Search |
-| Day 11 | ✅  | ✅   | Optimization! |
+| Day 11 | ✅  | ✅  | Optimization! |
 | Day 12 | ✅  | ✅  | This took all day...  |
 | Day 13 | ✅  | ⬜  | Had to look up a solution for part 2... |
-| Day 14 | ⬜  | ⬜  | |
+| Day 14 | ✅  | ✅  | Learnt that modulus operator acts funny in C#, python is closer to the mathematical use. Also part 2 with the tree was a cool challenge |
 | Day 15 | ⬜  | ⬜  | |
 | Day 16 | ⬜  | ⬜  | |
 | Day 17 | ⬜  | ⬜  | |
