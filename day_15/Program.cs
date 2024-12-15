@@ -48,7 +48,9 @@ var moves = new Dictionary<char, (int y, int x)> {
     {'^', (-1, 0)},
     {'v', (1, 0)},
 };
+
 (int y, int x) robot = (0, 0);
+
 var map = new char[height, width];
 for (int i = 0; i < mapString.Length; i++)
 {
@@ -56,7 +58,7 @@ for (int i = 0; i < mapString.Length; i++)
     {
         if (mapString[i][j] == '@')
         {
-            robot = (y: i, x: j*2);
+            robot = (y: i, x: j * 2);
             map[i, j * 2] = '.';
             map[i, j * 2 + 1] = '.';
         }
@@ -75,6 +77,7 @@ for (int i = 0; i < mapString.Length; i++)
 
 // PrintMap(map, robot);
 // Console.ReadLine();
+
 
 foreach (char instr in movements)
 {
@@ -129,7 +132,6 @@ PrintMap(map, robot);
 //         _ => '>'
 //     };
 // }
-
 // PrintMap(map, robot);
 
 int GPS = 0;
@@ -138,11 +140,11 @@ for (int i = 0; i < height; i++)
 {
     for (int j = 0; j < width; j++)
     {
-        if (map[i,j] == '[')
+        if (map[i, j] == '[')
         {
             GPS += i * 100 + j;
             boxes++;
-            if(map[i,j+1] != ']')
+            if (map[i, j + 1] != ']')
                 Console.WriteLine((i, j));
         }
     }
@@ -151,14 +153,14 @@ Console.WriteLine($"Part 2: {GPS}, boxes {boxes}");
 
 bool CanPush((int y, int x) pos, (int y, int x) dir)
 {
-    if (map[pos.y, pos.x] == '.') //already been moved
+    if (map[pos.y, pos.x] == '.')
         return true;
 
     List<(int y, int x)> nextpos = [(y: pos.y + dir.y, x: pos.x + dir.x)];
 
-    var thisChar = map[pos.y, pos.x];
     if (dir.y != 0)
     {
+        char thisChar = map[pos.y, pos.x];
         if (thisChar == '[')
             nextpos.Add((y: nextpos[0].y, x: nextpos[0].x + 1));
         if (thisChar == ']')
@@ -178,41 +180,34 @@ bool CanPush((int y, int x) pos, (int y, int x) dir)
     return false;
 }
 
-bool Push((int y, int x) pos, (int y, int x) dir)
+void Push((int y, int x) pos, (int y, int x) dir)
 {
     if (map[pos.y, pos.x] == '.') //already been moved
-        return true;
+        return;
 
     List<(int y, int x)> nextpos = [(y: pos.y + dir.y, x: pos.x + dir.x)];
 
-    var thisChar = map[pos.y, pos.x];
     if (dir.y != 0)
     {
+        char thisChar = map[pos.y, pos.x];
         if (thisChar == '[')
             nextpos.Add((y: nextpos[0].y, x: nextpos[0].x + 1));
         if (thisChar == ']')
             nextpos.Add((y: nextpos[0].y, x: nextpos[0].x - 1));
     }
 
-    if (nextpos.Any(next => IsWall(next)))
-    {
-        return false;
-    }
+    //Move children
+    nextpos.ForEach(pos => Push(pos, dir));
 
-    if (nextpos.All(pos => Push(pos, dir)))
-    {
-        nextpos.ForEach(Move);
-        return true;
-    }
+    //Move these
+    nextpos.ForEach(Move);
 
-    void Move((int y, int x) next) 
+    void Move((int y, int x) next)
     {
         (int y, int x) old = (y: next.y - dir.y, x: next.x - dir.x);
         map[next.y, next.x] = map[old.y, old.x];
         map[old.y, old.x] = '.';
     }
-
-    return false;
 }
 
 bool IsWall((int y, int x) pos) =>
