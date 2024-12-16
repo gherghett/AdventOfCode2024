@@ -70,31 +70,54 @@ for (int i = 0; i < mapString.Length; i++)
         }
         map[i, j] = mapString[i][j];
         map[i, j] = mapString[i][j];
-
     }
 }
 
 
+// Console.WriteLine(Solve().Count());
+var all = Solve();
+PrintMap(map, reindeerStart, all);
+Console.WriteLine(all.Select(s => s.Item1).Distinct().Count());
 
-PrintMap(map, reindeerStart);
-Console.WriteLine(Solve());
-
-int Solve()
+List<((int y, int x), int price)> Solve()
 {
     HashSet<((int y, int x) pos, int price)> visited = new();
     PriorityQueue<Movement, int> queue = new();
 
-    queue.Enqueue(new Movement { Position = reindeerStart, Orientation = startOrientation }, 0);
-    visited.Add((reindeerStart, 0));
+    // Dictionary<(int y, int x) , int> bestCostForTile = new();
+    List<Movement> paths = new List<Movement>();
+    int bestCost = int.MaxValue;
 
+    queue.Enqueue(new Movement { Position = reindeerStart, Orientation = startOrientation }, 0);
+    visited.Add((reindeerStart, ManhattanDistance(reindeerStart, end)));
+
+    int turns = 0;
     while (queue.Count > 0)
     {
+        turns++;
+
         Movement m = queue.Dequeue();
+        if (turns % 10000 == 0)
+        {
+            PrintMap(map, m.Position, AllPathPositions(m), orentations[m.Orientation]);
+            Console.WriteLine($"cost: {m.PathCost}, has turn:{m.HasRotation}, movement:{m.Move}, price by itself:{m.GetPrice()}");
+            Console.WriteLine($"{turns}: length of q: {queue.Count} visited: {visited.Count}");
+        }
 
         // heres the problem we need the cheapest route not the shortest
         if (m.Position == end)
         {
-            return GetPathCost(m);
+            if(m.PathCost <= bestCost)
+            {
+                paths.Add(m);
+                bestCost = m.PathCost;
+                Console.WriteLine("found a path");
+                continue;
+            }
+            else
+            {
+                break;
+            }
         }
 
         foreach (var turn in rotations)
@@ -113,18 +136,37 @@ int Solve()
 
             nextMovement.PathCost = m.PathCost + nextMovement.GetPrice();
 
-            // PrintMap(map, m.Position, orentations[nextMovement.Orientation]);
-            // Console.WriteLine($"cost: {nextMovement.PathCost}, has turn:{nextMovement.HasRotation}, movement:{nextMovement.Move}, price by itself:{nextMovement.GetPrice()}");
 
-            if (!visited.Any(visited =>
-                    visited.pos == newPos &&
-                    nextMovement.PathCost >= visited.price)
+            var rel = visited.Where(visited =>
+                    visited.pos == newPos);
+                
+
+            int pathCost = GetPathCost(nextMovement);
+
+            var anyCheaper = rel.Where(visited => visited.price < pathCost - 1000).Any();
+
+            if( !anyCheaper
                 && map[newPos.y, newPos.x] != '#')
             {
                 visited.Add((newPos, nextMovement.PathCost));
-                queue.Enqueue(nextMovement, nextMovement.PathCost);
+                var dist = ManhattanDistance(newPos, end);
+                queue.Enqueue(nextMovement, nextMovement.PathCost+ManhattanDistance(newPos, end));
             }
         }
+    }
+
+    return paths.SelectMany(last => AllPathPositions(last)).Distinct().ToList();
+
+
+    List<((int y , int x), int price)> AllPathPositions(Movement m)
+    {
+        var results = new List<((int y , int x), int price)>();
+        while (m is not null)
+        {
+            results.Add((m.Position, m.PathCost));
+            m = m.LastMovement!;
+        }
+        return results;
     }
 
     int GetPathCost(Movement m)
@@ -140,10 +182,12 @@ int Solve()
         return totalCost;
     }
 
-    return 0;
 }
 
-void PrintMap(char[,] map, (int y, int x) reindeer, char reindeerChar = 'R')
+int ManhattanDistance( (int y, int x) from, (int y, int x)to) =>
+    Math.Abs(to.y - from.y) + Math.Abs(to.x - from.x);
+
+void PrintMap(char[,] map, (int y, int x) reindeer, List<((int y, int x)pos, int price)> best,  char reindeerChar = 'R')
 {
     for (int i = 0; i < height; i++)
     {
@@ -151,9 +195,14 @@ void PrintMap(char[,] map, (int y, int x) reindeer, char reindeerChar = 'R')
         {
             if (i == reindeer.y && j == reindeer.x)
             {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.BackgroundColor = ConsoleColor.Cyan;
                 Console.Write(reindeerChar);
                 Console.ResetColor();
+            }
+            else if(best.Any(b => b.pos == (i,j)))
+            {
+                var b = best.Where(b => b.pos == (i,j)).First();
+                Console.Write(b.price.ToString().Substring(b.price.ToString().Length-1, 1)[0]);
             }
             // else if (i == mark.y && j == mark.x)
             //     Console.Write('x');
