@@ -76,8 +76,8 @@ for (int i = 0; i < mapString.Length; i++)
 
 // Console.WriteLine(Solve().Count());
 var all = Solve();
-PrintMap(map, reindeerStart, all);
-Console.WriteLine(all.Select(s => s.Item1).Distinct().Count());
+// PrintMap(map, reindeerStart, all);
+Console.WriteLine($"Part 2, coords in all best paths: {all.Select(s => s.Item1).Distinct().Count()}");
 
 List<((int y, int x), int price)> Solve()
 {
@@ -99,9 +99,10 @@ List<((int y, int x), int price)> Solve()
         Movement m = queue.Dequeue();
         if (turns % 10000 == 0)
         {
-            PrintMap(map, m.Position, AllPathPositions(m), orentations[m.Orientation]);
+            // PrintMap(map, m.Position, AllPathPositions(m), orentations[m.Orientation]);
             Console.WriteLine($"cost: {m.PathCost}, has turn:{m.HasRotation}, movement:{m.Move}, price by itself:{m.GetPrice()}");
             Console.WriteLine($"{turns}: length of q: {queue.Count} visited: {visited.Count}");
+            Console.WriteLine($"Paths found: {paths.Count}");
         }
 
         // heres the problem we need the cheapest route not the shortest
@@ -111,7 +112,7 @@ List<((int y, int x), int price)> Solve()
             {
                 paths.Add(m);
                 bestCost = m.PathCost;
-                Console.WriteLine("found a path");
+                // Console.WriteLine("found a path");
                 continue;
             }
             else
@@ -137,13 +138,11 @@ List<((int y, int x), int price)> Solve()
             nextMovement.PathCost = m.PathCost + nextMovement.GetPrice();
 
 
-            var rel = visited.Where(visited =>
-                    visited.pos == newPos);
-                
+            var visitedOnThisPosition = visited.Where(visited => visited.pos == newPos);
 
-            int pathCost = GetPathCost(nextMovement);
+            // int pathCost = GetPathCost(nextMovement);
 
-            var anyCheaper = rel.Where(visited => visited.price < pathCost - 1000).Any();
+            var anyCheaper = visitedOnThisPosition.Where(visited => visited.price < nextMovement.PathCost - 1000).Any();
 
             if( !anyCheaper
                 && map[newPos.y, newPos.x] != '#')
@@ -154,6 +153,8 @@ List<((int y, int x), int price)> Solve()
             }
         }
     }
+
+    Console.WriteLine($"Part 1, best cost: {bestCost}");
 
     return paths.SelectMany(last => AllPathPositions(last)).Distinct().ToList();
 
