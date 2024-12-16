@@ -37,7 +37,7 @@ Here’s a checklist to track my progress through the days. Each day consists of
 | Day 13 | ✅  | ⬜  | Had to look up a solution for part 2... |
 | Day 14 | ✅  | ✅  | Learnt that modulus operator acts funny in C#, python is closer to the mathematical use. Also part 2 with the tree was a cool challenge |
 | Day 15 | ✅  | ✅  | Took a while! No time to clean up code... |
-| Day 16 | ⬜  | ⬜  | |
+| Day 16 | ✅  | ✅  | Pretty difficult to debug|
 | Day 17 | ⬜  | ⬜  | |
 | Day 18 | ⬜  | ⬜  | |
 | Day 19 | ⬜  | ⬜  | |
