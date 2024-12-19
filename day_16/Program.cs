@@ -134,13 +134,9 @@ List<((int y, int x), int price)> Solve()
                 Orientation = dir,
                 HasRotation = dir != m.Orientation
             };
-
             nextMovement.PathCost = m.PathCost + nextMovement.GetPrice();
 
-
             var visitedOnThisPosition = visited.Where(visited => visited.pos == newPos);
-
-            // int pathCost = GetPathCost(nextMovement);
 
             var anyCheaper = visitedOnThisPosition.Where(visited => visited.price < nextMovement.PathCost - 1000).Any();
 
@@ -155,7 +151,7 @@ List<((int y, int x), int price)> Solve()
     }
 
     Console.WriteLine($"Part 1, best cost: {bestCost}");
-
+    Console.WriteLine($"explored steps: {turns}");
     return paths.SelectMany(last => AllPathPositions(last)).Distinct().ToList();
 
 
