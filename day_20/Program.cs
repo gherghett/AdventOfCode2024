@@ -1,9 +1,5 @@
-﻿using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks.Dataflow;
-
+﻿
+Console.WriteLine("Day 20!");
 string inString = @"###############
 #...#...#.....#
 #.#.#.#.#.###.#
@@ -50,12 +46,12 @@ for (int i = 0; i < stringMap.Length; i++)
 }
 Dictionary<(int y, int x), int > positionTravels = new();
 (int y, int x) traverser = start;
-int travel = 0;
+int travelCount = 0;
 while (true)
 {
     // Console.WriteLine(pos);
-    map[traverser.y, traverser.x] = travel++;
-    positionTravels[(traverser)] = travel;
+    map[traverser.y, traverser.x] = travelCount++;
+    positionTravels[(traverser)] = travelCount;
 
     var nextSteps = dirs
         .Select(n => (y: n.y + traverser.y, x: n.x + traverser.x))
@@ -81,22 +77,47 @@ foreach (var mapPos in positionTravels)
 
         int saved = positionTravels[shortCutEndUpPos] - place - shortCutLength;
 
-        if(saved <= 0)
+        if(saved < 100)
             continue;
         
         savedTimes.Add((mapPos.Key, shortCutEndUpPos, saved));
     }
 }
 
-PrintMap(map);
+List<((int y, int x), (int y, int x), int)> savedTimesPart2 = new();
+foreach (var mapPos in positionTravels)
+{
+    int travel = mapPos.Value;
+    var pos = mapPos.Key;
+    var window = positionTravels.Where(kvp => Distance(kvp.Key, pos) <= 20).ToList();
 
-Console.WriteLine(string.Join("\n", savedTimes.OrderBy(s => s.Item3)));
-Console.WriteLine(string.Join("\n", savedTimes.GroupBy(s => s.Item3).Select(group => (group.Key, group.Count())).OrderBy(g => g.Key)));
+    foreach ((var shortCutPos, var shortCutTravel) in window)
+    {
+        int saved = shortCutTravel - travel - Distance(shortCutPos, pos);
+
+        if(saved < 100)
+            continue;
+        
+        savedTimesPart2.Add((mapPos.Key, shortCutPos, saved));
+    }
+}
+
+// PrintMap(map);
+
+// Console.WriteLine(string.Join("\n", savedTimes.OrderBy(s => s.Item3)));
+// Console.WriteLine(string.Join("\n", savedTimes.GroupBy(s => s.Item3).Select(group => (group.Key, group.Count())).OrderBy(g => g.Key)));
 var atLeast100 = savedTimes
     .GroupBy(s => s.Item3)
     .Select(group => (group.Key, Count:group.Count()))
     .Where(group => group.Key >= 100 );
 Console.WriteLine($"part 1: {atLeast100.Select(g => g.Count).Sum()}");
+
+// Console.WriteLine(string.Join("\n", savedTimesPart2.OrderBy(s => s.Item3)));
+// Console.WriteLine(string.Join("\n",  savedTimesPart2.GroupBy(s => s.Item3).Select(group => (group.Key, group.Count())).OrderBy(g => g.Key)));
+Console.WriteLine($"part 2: {savedTimesPart2.Count()}");
+
+int Distance((int y, int x )a, (int y, int x )b  ) =>
+    (int)Math.Abs(a.y - b.y) + (int)Math.Abs(a.x - b.x);
 
 void PrintMap(int[,] map)
 {
