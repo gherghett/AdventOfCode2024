@@ -38,10 +38,10 @@ Here’s a checklist to track my progress through the days. Each day consists of
 | Day 14 | ✅  | ✅  | Learnt that modulus operator acts funny in C#, python is closer to the mathematical use. Also part 2 with the tree was a cool challenge |
 | Day 15 | ✅  | ✅  | Took a while! No time to clean up code... |
 | Day 16 | ✅  | ✅  | Pretty difficult to debug|
-| Day 17 | ⬜  | ⬜  | |
-| Day 18 | ⬜  | ⬜  | |
-| Day 19 | ⬜  | ⬜  | |
-| Day 20 | ⬜  | ⬜  | Very small chance I'll do these in real time!|
+| Day 17 | ✅   | ⬜  | No idea how to solve part 2... Will continue in slower pace. |
+| Day 18 | ✅  | ✅  | DFS |
+| Day 19 | ✅  | ✅  | Memoization!  |
+| Day 20 | ⬜  | ⬜  | |
 | Day 21 | ⬜  | ⬜  | |
 | Day 22 | ⬜  | ⬜  | |
 | Day 23 | ⬜  | ⬜  | |
