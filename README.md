@@ -41,7 +41,7 @@ Here’s a checklist to track my progress through the days. Each day consists of
 | Day 17 | ✅   | ⬜  | No idea how to solve part 2... Will continue in slower pace. |
 | Day 18 | ✅  | ✅  | DFS |
 | Day 19 | ✅  | ✅  | Memoization!  |
-| Day 20 | ⬜  | ⬜  | |
+| Day 20 | ✅  | ✅  | Interesting problem, the tidyness of my code has degraded |
 | Day 21 | ⬜  | ⬜  | |
 | Day 22 | ⬜  | ⬜  | |
 | Day 23 | ⬜  | ⬜  | |
